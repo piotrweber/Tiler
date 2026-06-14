@@ -4,36 +4,33 @@
 [ext_resource type="Texture2D" uid="uid://bgau6iqocd3" path="res://textures/coin.png" id="1_rwqht"]
 [ext_resource type="Script" uid="uid://bqj2tkjtgy3e5" path="res://scenes/coin_signals.gd" id="2_11l1o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_11l1o"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_11l1o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d14el"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d14el"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ikuy"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ikuy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnlwo"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wnlwo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jig8b"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jig8b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmuha"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xmuha"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i64fm")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_11l1o")
 }, {
@@ -48,6 +45,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jig8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmuha")
 }],
 "loop": true,
 "name": &"default",
@@ -55,7 +55,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfxoj"]
-radius = 19.026299
+radius = 20.0
 
 [node name="Coin" type="Node2D" unique_id=456450321]
 script = ExtResource("1_i64fm")
@@ -64,6 +64,7 @@ script = ExtResource("1_i64fm")
 script = ExtResource("2_11l1o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=21642477]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xmuha")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1726595098]

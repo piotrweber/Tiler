@@ -18,7 +18,8 @@ _data = [Vector2(0, 0.9873295), 0.0, -0.9873294, 0, 1, Vector2(1, 0), -0.9873294
 point_count = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
-height = 28.0
+radius = 9.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1062948318]
 script = ExtResource("1_g2els")
@@ -47,16 +48,15 @@ script = ExtResource("3_d2wvv")
 dash_ghost_scene = ExtResource("4_3v2ag")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=366370685]
-position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_u8vuu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1165641940]
+texture_filter = 1
 texture = ExtResource("2_qhqgy")
 
 [node name="StateMachine" type="Node" parent="." unique_id=797860598 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_qlg0r")
 initial_state = NodePath("Idle")
-print_state = true
 
 [node name="Move" type="Node" parent="StateMachine" unique_id=1407644369 node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
 script = ExtResource("5_qlg0r")

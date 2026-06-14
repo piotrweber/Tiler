@@ -1,5 +1,8 @@
 extends Node
 
+const TILE_SIZE : int = 32
+
+
 func _ready() -> void:
 	Sigs.coin_collected.connect(func(value): Vars.coins = value)
 

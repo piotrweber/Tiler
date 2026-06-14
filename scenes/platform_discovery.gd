@@ -6,7 +6,7 @@ class_name PlatformDiscovery
 ## - writes tiley_by_cell and platforms
 ## - gives each tile its identity
 
-## Build 
+## Build
 func build(layer : PlatformTileLayer):
 	read_tilemap(layer)
 	build_platforms(layer)

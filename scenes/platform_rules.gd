@@ -37,7 +37,6 @@ func lock_platform(platform_id : int):
 	count_locked_platforms()
 	
 
-		
 func count_locked_platforms():
 	layer.locked_count += 1
 	if layer.locked_count == layer.platforms.size():

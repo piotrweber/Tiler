@@ -2,26 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://da1jaxnmqxnwf" path="res://textures/tiles.png" id="1_0oq6g"]
 [ext_resource type="Script" uid="uid://dvwgqarqyvdlq" path="res://scenes/platform_tile.gd" id="1_c527w"]
+[ext_resource type="Texture2D" uid="uid://cn6bea57hi2a" path="res://textures/player.png" id="3_0hbd4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0oq6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c527w"]
 size = Vector2(32, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0hbd4"]
-atlas = ExtResource("1_0oq6g")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c527w"]
-atlas = ExtResource("1_0oq6g")
-region = Rect2(32, 0, 32, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hbd4"]
 size = Vector2(32, 32)
 
-[node name="PlatformTile" type="StaticBody2D" unique_id=2132270576]
+[node name="PlatformTile" type="StaticBody2D" unique_id=2132270576 node_paths=PackedStringArray("sprite")]
 physics_material_override = SubResource("PhysicsMaterial_0oq6g")
 script = ExtResource("1_c527w")
+sprite = NodePath("Sprite2D")
+bw_texture = ExtResource("1_0oq6g")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1072129685]
 
@@ -30,14 +25,10 @@ position = Vector2(0, -26)
 shape = SubResource("RectangleShape2D_c527w")
 one_way_collision_margin = 0.0
 
-[node name="Lock" type="Sprite2D" parent="." unique_id=64827073]
-texture_filter = 1
-texture = SubResource("AtlasTexture_0hbd4")
-
-[node name="Preview" type="Sprite2D" parent="." unique_id=1056475832]
-texture_filter = 1
-texture = SubResource("AtlasTexture_c527w")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511207929]
 shape = SubResource("RectangleShape2D_0hbd4")
 one_way_collision_margin = 32.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1284367368]
+texture_filter = 1
+texture = ExtResource("3_0hbd4")
