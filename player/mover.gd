@@ -27,6 +27,9 @@ class_name Mover
 @export_range(0.1,1.0,0.10) var input_buffer_patience = 0.1
 @export_range(0.01,1.0) var coyote_time = 0.08
 
+signal dash_started
+signal dash_ended
+
 var input_timer : Timer
 var coyote_timer : Timer
 var dash_timer : Timer
@@ -59,7 +62,7 @@ func setup_timers():
 	dash_timer.wait_time = dash_duration
 	dash_timer.one_shot = true
 	add_child(dash_timer)
-	dash_timer.timeout.connect(func(): is_dashing = false)
+	dash_timer.timeout.connect(_on_dash_timer_timeout)
 
 	double_jump_timer = Timer.new()
 	double_jump_timer.wait_time = double_jump_window
@@ -70,10 +73,15 @@ func setup_timers():
 func on_coyote_timer_timeout():
 	is_coyote_ready = false
 
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
+	dash_ended.emit()
+
 func try_dash() -> void:
 	if Input.is_action_just_pressed("dash") and not is_dashing:
 		is_dashing = true
 		dash_timer.start()
+		dash_started.emit()
 
 # Returns the appropriate gravity based on movement context
 func move_x(current_x: float, horizontal_input: float, delta: float) -> float:

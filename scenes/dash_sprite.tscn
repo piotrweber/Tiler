@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dtrkocwjmw5vv"]
+
+[ext_resource type="Script" uid="uid://d23felnt26crw" path="res://player/dash_sprite.gd" id="1_myvj3"]
+
+[node name="DashSprite" type="Sprite2D" unique_id=283749393]
+script = ExtResource("1_myvj3")

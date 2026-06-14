@@ -3,6 +3,8 @@ class_name Player
 
 var mover : Mover = null
 var state_machine : StateMachine = null
+var dash_sprite : DashSprite
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:

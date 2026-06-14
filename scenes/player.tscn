@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b05rlcocb1f2n" path="res://player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bxncdbfs54kbd" path="res://player/mover.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cn6bea57hi2a" path="res://textures/player.png" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://b43qjplbin0n3" path="res://scenes/vfx.gd" id="3_d2wvv"]
+[ext_resource type="PackedScene" uid="uid://dtrkocwjmw5vv" path="res://scenes/dash_sprite.tscn" id="4_3v2ag"]
 [ext_resource type="Script" uid="uid://dlbuhq1pvswr3" path="res://player/state_machine.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://dxfyrm6601d3x" path="res://player/move_state.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dwcwkbx6t6s33" path="res://player/idle_state.gd" id="6_tuyoq"]
@@ -22,13 +24,17 @@ move_ground_velocity = 220.0
 move_air_velocity = 180.0
 friction = 3540.0
 dash_speed_multiplier = 4.5
-dash_duration = 0.1
+dash_duration = 0.3
 fall_gravity = 1000.0
 fast_fall_gravity = 3000.0
 wall_gravity = 20.0
 jump_velocity = 500.0
 wall_jump_pushback = 390.0
 coyote_time = 0.09999999999999999
+
+[node name="VFX" type="Node" parent="." unique_id=1024753649]
+script = ExtResource("3_d2wvv")
+dash_ghost_scene = ExtResource("4_3v2ag")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=366370685]
 position = Vector2(0, 2)
