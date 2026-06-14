@@ -1,0 +1,2 @@
+extends BaseTile
+class_name PlatformTile
