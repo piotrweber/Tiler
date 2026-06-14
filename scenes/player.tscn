@@ -7,7 +7,8 @@
 [ext_resource type="Script" uid="uid://dxfyrm6601d3x" path="res://player/move_state.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dwcwkbx6t6s33" path="res://player/idle_state.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://cjys0eji6dtyr" path="res://player/jump_state.gd" id="7_fjrip"]
-[ext_resource type="Script" uid="uid://cyrto5rocvani" path="res://scenes/fall_state.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://b5x21x7y0pcyv" path="res://player/fall_state.gd" id="8_ur7pv"]
+[ext_resource type="Script" uid="uid://la0pq1bqhxq" path="res://player/wall_jump_state.gd" id="9_ur7pv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 height = 28.0
@@ -17,6 +18,17 @@ script = ExtResource("1_g2els")
 
 [node name="Mover" type="Node" parent="." unique_id=2102020414]
 script = ExtResource("2_dqkch")
+move_ground_velocity = 220.0
+move_air_velocity = 180.0
+friction = 3540.0
+dash_speed_multiplier = 4.5
+dash_duration = 0.1
+fall_gravity = 1000.0
+fast_fall_gravity = 3000.0
+wall_gravity = 20.0
+jump_velocity = 500.0
+wall_jump_pushback = 390.0
+coyote_time = 0.09999999999999999
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=366370685]
 position = Vector2(0, 2)
@@ -28,11 +40,13 @@ texture = ExtResource("2_qhqgy")
 [node name="StateMachine" type="Node" parent="." unique_id=797860598 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_qlg0r")
 initial_state = NodePath("Idle")
+print_state = true
 
-[node name="Move" type="Node" parent="StateMachine" unique_id=1407644369 node_paths=PackedStringArray("idle_state", "jump_state")]
+[node name="Move" type="Node" parent="StateMachine" unique_id=1407644369 node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
 script = ExtResource("5_qlg0r")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=848454723 node_paths=PackedStringArray("move_state", "jump_state", "fall_state")]
 script = ExtResource("6_tuyoq")
@@ -40,12 +54,22 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=863682975 node_paths=PackedStringArray("state_idle", "move_state", "fall_state")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=863682975 node_paths=PackedStringArray("state_idle", "move_state", "fall_state", "wall_jump_state", "jump_state")]
 script = ExtResource("7_fjrip")
 state_idle = NodePath("../Idle")
 move_state = NodePath("../Move")
 fall_state = NodePath("../Fall")
+wall_jump_state = NodePath("../WallJump")
+jump_state = NodePath(".")
 
-[node name="Fall" type="Node" parent="StateMachine" unique_id=801446793 node_paths=PackedStringArray("state_idle")]
-script = ExtResource("8_smehm")
-state_idle = NodePath("../Idle")
+[node name="Fall" type="Node" parent="StateMachine" unique_id=801446793 node_paths=PackedStringArray("idle_state", "jump_state", "wall_jump_state", "move_state")]
+script = ExtResource("8_ur7pv")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+wall_jump_state = NodePath("../WallJump")
+move_state = NodePath("../Move")
+
+[node name="WallJump" type="Node" parent="StateMachine" unique_id=1208402434 node_paths=PackedStringArray("fall_state", "idle_state")]
+script = ExtResource("9_ur7pv")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")

@@ -4,7 +4,7 @@ class_name State
 ## Base class all states inherit from
 
 # Have a consistent value for every physics object
-var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+#var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Hold a reference to nodes used by states
 var sprite : Sprite2D = null
 var player : Player = null
