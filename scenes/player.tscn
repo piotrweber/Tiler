@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b05rlcocb1f2n" path="res://player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bxncdbfs54kbd" path="res://player/mover.gd" id="2_dqkch"]
+[ext_resource type="Script" path="res://player/dasher.gd" id="2b_dshr"]
 [ext_resource type="Texture2D" uid="uid://cn6bea57hi2a" path="res://textures/player.png" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://b43qjplbin0n3" path="res://scenes/vfx.gd" id="3_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://dtrkocwjmw5vv" path="res://scenes/dash_sprite.tscn" id="4_3v2ag"]
@@ -23,14 +24,17 @@ script = ExtResource("2_dqkch")
 move_ground_velocity = 220.0
 move_air_velocity = 180.0
 friction = 3540.0
-dash_speed_multiplier = 4.5
-dash_duration = 0.3
 fall_gravity = 1000.0
 fast_fall_gravity = 3000.0
 wall_gravity = 20.0
 jump_velocity = 500.0
 wall_jump_pushback = 390.0
 coyote_time = 0.09999999999999999
+
+[node name="Dasher" type="Node" parent="." unique_id=1111111111]
+script = ExtResource("2b_dshr")
+dash_speed_multiplier = 4.5
+dash_duration = 0.3
 
 [node name="VFX" type="Node" parent="." unique_id=1024753649]
 script = ExtResource("3_d2wvv")

@@ -16,7 +16,7 @@ func enter() -> void:
 	mover.double_jump_timer.start(mover.double_jump_window)
 
 func process_input(event : InputEvent) -> State:
-	mover.try_dash()
+	dasher.try_dash()
 	if Input.is_action_just_pressed("jump"):
 		if player.is_on_wall():
 			var move = Input.get_axis("move_left", "move_right")
@@ -32,6 +32,7 @@ func process_physics(delta : float) -> State:
 	player.velocity.x = mover.move_x(player.velocity.x, horizontal_input, delta)
 	player.velocity.y += mover.get_gravity(horizontal_input) * delta
 	player.move_and_slide()
+	dasher.clamp_to_target()
 
 	if player.velocity.y >= 0:
 		return fall_state

@@ -27,6 +27,8 @@ func _ready() -> void:
 
 func on_body_entered(body : Node2D):
 	if body.is_in_group("player"):
+		if body.velocity.y < 0:
+			return
 		stepped_on.emit(self)
 
 func on_body_exited(body : Node2D):

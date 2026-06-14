@@ -20,13 +20,15 @@ func _enter_tree() -> void:
 func init(
 			p_player : Player,
 			p_mover : Mover,
-			p_sprite : Sprite2D
+			p_sprite : Sprite2D,
+			p_dasher : Dasher
 			) -> void:
 
 	for child : State in get_children():
 		child.player = p_player
 		child.sprite = p_sprite
 		child.mover = p_mover
+		child.dasher = p_dasher
 		
 	if initial_state:
 		change_state(initial_state)

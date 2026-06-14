@@ -10,7 +10,7 @@ func enter() -> void:
 	super()
 
 func process_input(event : InputEvent) -> State:
-	mover.try_dash()
+	dasher.try_dash()
 	var jump_pressed = Input.is_action_just_pressed("jump")
 	if jump_pressed or mover.input_timer.time_left > 0:
 		var move = Input.get_axis("move_left", "move_right")
@@ -30,6 +30,7 @@ func process_physics(delta : float) -> State:
 	player.velocity.x = mover.move_x(player.velocity.x, move, delta)
 	player.velocity.y += mover.get_gravity(move) * delta
 	player.move_and_slide()
+	dasher.clamp_to_target()
 
 	if player.is_on_floor():
 		if move != 0:

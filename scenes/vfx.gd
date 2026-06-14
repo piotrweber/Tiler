@@ -18,8 +18,8 @@ func _ready() -> void:
 	add_child(_spawn_timer)
 	_spawn_timer.timeout.connect(_spawn_ghost)
 
-	_player.mover.dash_started.connect(_on_dash_started)
-	_player.mover.dash_ended.connect(_on_dash_ended)
+	_player.dasher.dash_started.connect(_on_dash_started)
+	_player.dasher.dash_ended.connect(_on_dash_ended)
 
 func _on_dash_started() -> void:
 	_spawn_ghost()

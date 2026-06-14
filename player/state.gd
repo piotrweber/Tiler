@@ -9,6 +9,7 @@ class_name State
 var sprite : Sprite2D = null
 var player : Player = null
 var mover : Mover = null
+var dasher : Dasher = null
 # Save the state we came from
 var previous_state : State = null
 

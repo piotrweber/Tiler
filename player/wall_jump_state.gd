@@ -12,7 +12,7 @@ func enter() -> void:
 		player.velocity.x = mover.wall_jump_pushback * -sign(move)
 
 func process_input(event : InputEvent) -> State:
-	mover.try_dash()
+	dasher.try_dash()
 	return null
 
 func process_physics(delta : float) -> State:
@@ -20,6 +20,7 @@ func process_physics(delta : float) -> State:
 	player.velocity.x = mover.move_x(player.velocity.x, horizontal_input, delta)
 	player.velocity.y += mover.get_gravity(horizontal_input) * delta
 	player.move_and_slide()
+	dasher.clamp_to_target()
 
 	if player.is_on_floor():
 		return idle_state

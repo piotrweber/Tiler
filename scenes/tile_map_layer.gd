@@ -26,6 +26,7 @@ func init_level():
 	for tile : BaseTile in tiles_by_cell.values():
 		tile.stepped_on.connect(rules.on_tile_stepped_on)
 		tile.stepped_off.connect(rules.on_tile_stepped_off)
+	Sigs.platform_layer_ready.emit(self)
 
 func get_save_state():
 	pass
