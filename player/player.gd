@@ -22,3 +22,5 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+	if dasher != null:
+		sprite.flip_h = dasher.last_h_direction < 0

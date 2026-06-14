@@ -32,9 +32,7 @@ func build_platforms(layer : PlatformTileLayer):
 	# Setup all tiles
 	for i in groups.size():
 		layer.platforms.append({
-			# what platform does this belong to
 			cells = groups[i],
-			# how many tiles have been stepped on
 			stepped = {},
 			is_locked = false
 		})
@@ -43,6 +41,15 @@ func build_platforms(layer : PlatformTileLayer):
 			tile.setup(cell,i,neighbor_mask(layer, cell))
 		
 
+# takes a flat list of tile cells and splits them into groups 
+# of connected tiles — each group becomes one platform.
+# It works by visiting every cell once. 
+# When it finds an unvisited cell, 
+# it explores outward in all four directions 
+# (up/right/down/left), collecting every tile reachable without gaps. 
+# The result is an array of arrays: [[cells of platform 0], [cells of platform 1], ...], 
+# which build_platforms then uses to assign each tile its platform_id.
+# DOESNT? WORK FOR DIAGONALS NOR SINGLES
 func flood_fill(cells: Array) -> Array:
 	# Build a set of all cells so we can mark them visited in O(1)
 	var unvisited := {}
