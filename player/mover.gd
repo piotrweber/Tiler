@@ -63,10 +63,32 @@ func move_x(current_x: float, horizontal_input: float, delta: float) -> float:
 	var damping = 1.0 if parent.is_on_floor() else air_damping
 	var dash_mult = dasher.dash_speed_multiplier if dasher != null and dasher.is_dashing else 1.0
 	var target_speed = move_ground_velocity if parent.is_on_floor() else move_air_velocity
+	var brake_remaining := NAN
+	if dasher != null and dasher.is_dashing and not is_nan(dasher.dash_target_x):
+		brake_remaining = (dasher.dash_target_x - parent.global_position.x) * dasher.last_h_direction
+		if brake_remaining >= 0.0 and brake_remaining <= dasher.brake_zone_width:
+			if dasher.brake_curve != null:
+				var t = clamp(brake_remaining / dasher.brake_zone_width, 0.0, 1.0)
+				dash_mult *= dasher.brake_curve.sample_baked(t)
+
+	var new_x: float
 	if horizontal_input != 0.0:
-		return move_toward(current_x, horizontal_input * target_speed * dash_mult, acceleration * delta)
+		new_x = move_toward(current_x, horizontal_input * target_speed * dash_mult, acceleration * delta)
 	else:
-		return move_toward(current_x, 0.0, friction * damping * delta)
+		new_x = move_toward(current_x, 0.0, friction * damping * delta)
+
+	if not is_nan(brake_remaining):
+		if brake_remaining >= 0.0:
+			var max_v = sqrt(2.0 * dasher.brake_deceleration * brake_remaining)
+			if new_x * dasher.last_h_direction > max_v:
+				new_x = dasher.last_h_direction * max_v
+		else:
+			if new_x * dasher.last_h_direction > 0.0:
+				new_x = 0.0
+			dasher.snap_x = dasher.dash_target_x
+			dasher.end_dash()
+
+	return new_x
 
 func get_gravity(horizontal_input: float) -> float:
 	if Input.is_action_pressed("fast_fall"):

@@ -22,7 +22,7 @@ func process_physics(delta : float) -> State:
 	player.velocity.x = mover.move_x(player.velocity.x, 0.0, delta)
 	player.velocity.y += mover.gravity * delta
 	player.move_and_slide()
-	dasher.clamp_to_target()
+	dasher.apply_snap(player)
 
 	if not player.is_on_floor():
 		# Player walked off a ledge — arm coyote so they can still jump briefly

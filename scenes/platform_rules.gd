@@ -8,16 +8,16 @@ class_name PlatformRules
 func on_tile_stepped_on(tile : BaseTile):
 	var platform : Dictionary = layer.platforms[tile.platform_id]
 
-	if platform.is_locked:
-		return
-
 	if layer.current_platform != tile.platform_id:
 		conceal_platform(layer.current_platform)
 		layer.current_platform = tile.platform_id
 
+	if platform.is_locked:
+		return
+
 	platform.stepped[tile.cell] = true
 	tile.preview()
-	
+
 	# If the player stepped on all tiles
 	if platform.stepped.size() == platform.cells.size():
 		lock_platform(tile.platform_id)

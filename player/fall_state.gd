@@ -30,7 +30,6 @@ func process_physics(delta : float) -> State:
 	player.velocity.x = mover.move_x(player.velocity.x, move, delta)
 	player.velocity.y += mover.get_gravity(move) * delta
 	player.move_and_slide()
-	dasher.clamp_to_target()
 
 	if player.is_on_floor():
 		if move != 0:
