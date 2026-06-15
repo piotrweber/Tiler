@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dqab74aq82x7t"]
+
+[ext_resource type="Script" uid="uid://cwjfq3eo4pj8i" path="res://scenes/room_exit.gd" id="1_ogp71"]
+
+[node name="LevelDoor" type="Area2D" unique_id=230426456]
+script = ExtResource("1_ogp71")
