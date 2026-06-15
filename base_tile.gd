@@ -22,6 +22,7 @@ signal stepped_off(tile : BaseTile)
 # The final revealed state is owned by the level
 enum TileState { HIDDEN, VISIBLE, LOCKED }
 var state : TileState = TileState.HIDDEN
+var signals : PlatformTileSignals
 
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -63,11 +64,15 @@ func preview():
 	state = TileState.VISIBLE
 	collision_shape_2d.set_deferred("disabled", false)
 	update_sprite()
+	if signals != null:
+		signals.previewed.emit()
 
 func lock():
 	state = TileState.LOCKED
 	collision_shape_2d.set_deferred("disabled", false)
 	update_sprite()
+	if signals != null:
+		signals.locked.emit()
 
 func conceal():
 	state = TileState.HIDDEN
@@ -83,6 +88,7 @@ func reveal():
 func colorize(tex: Texture2D) -> void:
 	is_colored = true
 	_colored_texture = tex
+	signals.colored.emit()
 	update_sprite()
 
 # Display

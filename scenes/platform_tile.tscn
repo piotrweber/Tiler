@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://da1jaxnmqxnwf" path="res://textures/tiles.png" id="1_0oq6g"]
 [ext_resource type="Script" uid="uid://dvwgqarqyvdlq" path="res://scenes/platform_tile.gd" id="1_c527w"]
+[ext_resource type="Script" uid="uid://ihtv27ggyd5r" path="res://scenes/sprite_scale_vfx.gd" id="3_0hbd4"]
+[ext_resource type="Script" uid="uid://d2nsjv77hmy16" path="res://scenes/platformTileSignals.gd" id="3_bo8g8"]
+[ext_resource type="Script" uid="uid://dpao5u7anh4jp" path="res://scenes/sprite_wobble_vfx.gd" id="5_oi74v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0oq6g"]
 
@@ -21,6 +24,9 @@ script = ExtResource("1_c527w")
 sprite = NodePath("Sprite2D")
 bw_texture = ExtResource("1_0oq6g")
 
+[node name="Signals" type="Node" parent="." unique_id=1198831237]
+script = ExtResource("3_bo8g8")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=1072129685]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2063968053]
@@ -35,3 +41,12 @@ one_way_collision_margin = 32.0
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1284367368]
 texture_filter = 1
 texture = SubResource("AtlasTexture_c527w")
+
+[node name="Scale" type="Node" parent="Sprite2D" unique_id=1453528190]
+script = ExtResource("3_0hbd4")
+
+[node name="Wobble" type="Node" parent="Sprite2D" unique_id=1970103810]
+script = ExtResource("5_oi74v")
+wobble_angle = 2.0
+angle_variance = 1.0
+period = 0.2
