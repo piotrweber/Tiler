@@ -10,6 +10,9 @@ var neighbor_mask : int = 0
 @export var sprite: Sprite2D
 @export var bw_texture : Texture2D
 
+var is_colored := false
+var _colored_texture: Texture2D
+
 # To what platform does this cell belong
 var platform_id : int = -1
 var map_layer : TileMapLayer
@@ -77,13 +80,18 @@ func reveal():
 	state = TileState.VISIBLE
 	update_sprite()
 
+func colorize(tex: Texture2D) -> void:
+	is_colored = true
+	_colored_texture = tex
+	update_sprite()
+
 # Display
 func update_sprite() -> void:
 	sprite.visible = state != TileState.HIDDEN
 	if not sprite.visible:
 		return
-	sprite.texture = bw_texture
+	sprite.texture = _colored_texture if is_colored else bw_texture
 	sprite.region_enabled = true
 	var row : int = MASK_TO_ROW.get(neighbor_mask, 0)
-	var col := COL_LOCKED if state == TileState.LOCKED else COL_TEMPORARY
+	var col := 0 if is_colored else (COL_LOCKED if state == TileState.LOCKED else COL_TEMPORARY)
 	sprite.region_rect = Rect2(col * Vars.TILE_SIZE, row * Vars.TILE_SIZE, Vars.TILE_SIZE, Vars.TILE_SIZE)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelTheme" format=3 uid="uid://cgrq4tcmgg40p"]
+
+[ext_resource type="Script" uid="uid://s08eofvjsdkr" path="res://scenes/level_theme.gd" id="1_ed84c"]
+[ext_resource type="Texture2D" uid="uid://gqiibxxs31h3" path="res://textures/tiles_lvl_01.png" id="2_0q70t"]
+
+[resource]
+script = ExtResource("1_ed84c")
+tile_colored_texture = ExtResource("2_0q70t")
+background_color = Color(0.0627451, 0.3647059, 0.63529414, 1)
+metadata/_custom_type_script = "uid://s08eofvjsdkr"

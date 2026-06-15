@@ -43,6 +43,6 @@ func count_locked_platforms():
 		_complete_level()
 
 func _complete_level() -> void:
-	print_debug("level complete!")
+	Sigs.level_completed.emit()
 
 	

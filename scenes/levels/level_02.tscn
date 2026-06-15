@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cxv0udbu5ebg2"]
 
 [ext_resource type="Script" uid="uid://n4dcx23v2pi" path="res://scenes/room.gd" id="1_yklhy"]
+[ext_resource type="Resource" uid="uid://cgrq4tcmgg40p" path="res://scenes/themes/theme_01.tres" id="2_4hx2o"]
 [ext_resource type="Texture2D" uid="uid://da1jaxnmqxnwf" path="res://textures/tiles.png" id="2_o4ql5"]
 [ext_resource type="PackedScene" uid="uid://b55ai74a1mrhq" path="res://scenes/coin.tscn" id="3_4hx2o"]
 [ext_resource type="PackedScene" uid="uid://d0obxl3i8gihs" path="res://scenes/platform_tile.tscn" id="4_km0xc"]
@@ -94,6 +95,7 @@ size = Vector2(20, 94)
 
 [node name="02" type="Node2D" unique_id=1545808730]
 script = ExtResource("1_yklhy")
+theme = ExtResource("2_4hx2o")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1682802822]
 offset_left = -65.0
@@ -122,7 +124,7 @@ position = Vector2(75, 577)
 
 [node name="LevelDoor" parent="." unique_id=230426456 instance=ExtResource("9_c6rld")]
 position = Vector2(1153, 72)
-target_scene_uid = "uid://cxv0udbu5ebg2"
+target_scene_path = "res://scenes/levels/level_01.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoor" unique_id=1950190840]
 position = Vector2(9, 8)

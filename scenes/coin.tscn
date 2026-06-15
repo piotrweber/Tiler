@@ -3,6 +3,57 @@
 [ext_resource type="Script" uid="uid://4n4xebeqndf2" path="res://scenes/coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://bgau6iqocd3" path="res://textures/coin.png" id="1_rwqht"]
 [ext_resource type="Script" uid="uid://bqj2tkjtgy3e5" path="res://scenes/coin_signals.gd" id="2_11l1o"]
+[ext_resource type="Texture2D" uid="uid://c88teb1hev5kq" path="res://textures/coin-colored.png" id="2_d14el"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfxoj"]
+atlas = ExtResource("2_d14el")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsmju"]
+atlas = ExtResource("2_d14el")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0mny"]
+atlas = ExtResource("2_d14el")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cc30"]
+atlas = ExtResource("2_d14el")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rojmm"]
+atlas = ExtResource("2_d14el")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls27i"]
+atlas = ExtResource("2_d14el")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ssuvv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfxoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsmju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0mny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cc30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rojmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls27i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_11l1o"]
 atlas = ExtResource("1_rwqht")
@@ -57,8 +108,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfxoj"]
 radius = 20.0
 
-[node name="Coin" type="Node2D" unique_id=456450321]
+[node name="Coin" type="Node2D" unique_id=456450321 groups=["coins"]]
 script = ExtResource("1_i64fm")
+colored_frames = SubResource("SpriteFrames_ssuvv")
 
 [node name="Signals" type="Node" parent="." unique_id=737353858]
 script = ExtResource("2_11l1o")
