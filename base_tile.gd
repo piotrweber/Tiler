@@ -74,6 +74,11 @@ func lock():
 	if signals != null:
 		signals.locked.emit()
 
+func restore_lock() -> void:
+	state = TileState.LOCKED
+	collision_shape_2d.set_deferred("disabled", false)
+	update_sprite()
+
 func conceal():
 	state = TileState.HIDDEN
 	#lock_sprite.hide()
@@ -89,6 +94,11 @@ func colorize(tex: Texture2D) -> void:
 	is_colored = true
 	_colored_texture = tex
 	signals.colored.emit()
+	update_sprite()
+
+func restore_color(tex: Texture2D) -> void:
+	is_colored = true
+	_colored_texture = tex
 	update_sprite()
 
 # Display

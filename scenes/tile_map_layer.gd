@@ -23,13 +23,13 @@ func _ready() -> void:
 
 func init_level():
 	discovery.build(self)
+	persistence.restore(self)
 	for tile : BaseTile in tiles_by_cell.values():
 		tile.stepped_on.connect(rules.on_tile_stepped_on)
 		tile.stepped_off.connect(rules.on_tile_stepped_off)
 	Sigs.platform_layer_ready.emit(self)
 
-func get_save_state():
-	pass
-	
-func apply_save_sate():
-	pass
+func get_save_state() -> Dictionary:
+	return Vars.get_room_state(
+		get_tree().current_scene.scene_file_path.get_file().get_basename()
+	)

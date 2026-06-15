@@ -29,11 +29,11 @@ func lock_platform(platform_id : int):
 		return
 	
 	platform.is_locked = true
-	
-	# lock all cells in platform
+	layer.persistence.save_locked(platform_id)
+
 	for cell: Vector2i in platform.cells:
 		layer.tiles_by_cell[cell].lock()
-	
+
 	count_locked_platforms()
 	
 
