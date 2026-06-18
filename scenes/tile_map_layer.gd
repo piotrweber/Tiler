@@ -24,10 +24,39 @@ func _ready() -> void:
 func init_level():
 	discovery.build(self)
 	persistence.restore(self)
+	_resolve_traps()
 	for tile : BaseTile in tiles_by_cell.values():
 		tile.stepped_on.connect(rules.on_tile_stepped_on)
 		tile.stepped_off.connect(rules.on_tile_stepped_off)
 	Sigs.platform_layer_ready.emit(self)
+
+func _resolve_traps() -> void:
+	for platform in platforms:
+		var trap_cell := Vector2i(-1, -1)
+		for cell : Vector2i in platform.cells:
+			if tiles_by_cell[cell] is TrapTile:
+				trap_cell = cell
+				break
+		if trap_cell == Vector2i(-1, -1):
+			continue
+		var trap_tile := tiles_by_cell[trap_cell] as TrapTile
+		if not trap_tile.randomize_position:
+			continue
+		var candidates: Array = platform.cells.filter(func(c): return not (tiles_by_cell[c] is TrapTile))
+		if candidates.is_empty():
+			continue
+		var target_cell: Vector2i = candidates.pick_random()
+		var regular_tile := tiles_by_cell[target_cell] as BaseTile
+		tiles_by_cell[trap_cell] = regular_tile
+		tiles_by_cell[target_cell] = trap_tile
+		var tmp_pos := trap_tile.position
+		trap_tile.position = regular_tile.position
+		regular_tile.position = tmp_pos
+		trap_tile.cell = target_cell
+		regular_tile.cell = trap_cell
+		var tmp_mask := trap_tile.neighbor_mask
+		trap_tile.neighbor_mask = regular_tile.neighbor_mask
+		regular_tile.neighbor_mask = tmp_mask
 
 func get_save_state() -> Dictionary:
 	return Vars.get_room_state(

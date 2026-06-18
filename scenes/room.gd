@@ -21,9 +21,19 @@ func _ready() -> void:
 	Sigs.platform_layer_ready.connect(func(layer: PlatformTileLayer) -> void:
 		_tile_layer = layer
 		_restore_colored()
+		for tile : BaseTile in layer.tiles_by_cell.values():
+			tile.trap_triggered.connect(_on_trap_triggered)
 	)
 	if theme != null:
 		Sigs.level_completed.connect(_on_level_completed)
+
+func _swap_themed_layers(tex: Texture2D) -> void:
+	for node in get_tree().get_nodes_in_group("themed_layers"):
+		var layer := node as TileMapLayer
+		for idx in range(layer.tile_set.get_source_count()):
+			var src := layer.tile_set.get_source(layer.tile_set.get_source_id(idx)) as TileSetAtlasSource
+			if src:
+				src.texture = tex
 
 func _restore_colored() -> void:
 	if theme == null:
@@ -38,6 +48,11 @@ func _restore_colored() -> void:
 	for coin in get_tree().get_nodes_in_group("coins"):
 		if coin.has_method("colorize"):
 			coin.colorize()
+	_swap_themed_layers(theme.tile_colored_texture)
+
+func _on_trap_triggered(_tile: BaseTile) -> void:
+	var packed := load(scene_file_path) as PackedScene
+	get_tree().call_deferred(&"change_scene_to_packed", packed)
 
 func _on_level_completed() -> void:
 	Vars.get_room_state(SceneManager.current_room_id)["is_colored"] = true
@@ -51,3 +66,4 @@ func _on_level_completed() -> void:
 	for coin in get_tree().get_nodes_in_group("coins"):
 		if coin.has_method("colorize"):
 			coin.colorize()
+	_swap_themed_layers(theme.tile_colored_texture)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nidyvnxloo0h"
-path="res://.godot/imported/backgrounds.png-add9f5df3bb61d78c15ac2a8f6b61373.ctex"
+uid="uid://b38fpqjrc7mw3"
+path="res://.godot/imported/trap-tile-bw.png-257c91cf7881b1955d80117cd27a7a6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/backgrounds.png"
-dest_files=["res://.godot/imported/backgrounds.png-add9f5df3bb61d78c15ac2a8f6b61373.ctex"]
+source_file="res://textures/trap-tile-bw.png"
+dest_files=["res://.godot/imported/trap-tile-bw.png-257c91cf7881b1955d80117cd27a7a6b.ctex"]
 
 [params]
 

@@ -10,6 +10,8 @@ var neighbor_mask : int = 0
 @export var sprite: Sprite2D
 @export var bw_texture : Texture2D
 
+signal trap_triggered(tile: BaseTile)
+
 var is_colored := false
 var _colored_texture: Texture2D
 
@@ -91,12 +93,17 @@ func reveal():
 	update_sprite()
 
 func colorize(tex: Texture2D) -> void:
+	if tex == null:
+		return
 	is_colored = true
 	_colored_texture = tex
-	signals.colored.emit()
+	if signals != null:
+		signals.colored.emit()
 	update_sprite()
 
 func restore_color(tex: Texture2D) -> void:
+	if tex == null:
+		return
 	is_colored = true
 	_colored_texture = tex
 	update_sprite()
